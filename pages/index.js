@@ -1,58 +1,41 @@
 // Theirs
 import React from 'react'
+import { withRouter } from 'next/router'
+import { register, unregister } from 'next-offline/runtime'
+import Either from 'eitherx'
 
 // Ours
-import Editor from '../components/Editor'
+import EditorContainer from '../components/EditorContainer'
 import Page from '../components/Page'
-import api from '../lib/api'
-import { getQueryStringState, updateQueryString } from '../lib/routing'
-import { saveState } from '../lib/util'
+import { MetaLinks } from '../components/Meta'
 
 class Index extends React.Component {
-  static async getInitialProps({ asPath, query }) {
-    const path = removeQueryString(asPath.split('/').pop())
-    const queryParams = getQueryStringState(query)
-    const initialState = Object.keys(queryParams).length ? queryParams : {}
-    try {
-      // TODO fix this hack
-      if (path.length >= 19 && path.indexOf('.') === -1) {
-        const { content, language } = await api.getGist(path)
-        if (language) {
-          initialState.language = language.toLowerCase()
-        }
-        return { content, initialState }
-      }
-    } catch (e) {
-      // eslint-disable-next-line
-      console.log(e)
-    }
-    return { initialState }
+  componentDidMount() {
+    register()
   }
+  componentWillUnmount() {
+    unregister()
+  }
+
+  shouldComponentUpdate = () => false
 
   render() {
     return (
       <Page enableHeroText={true}>
-        <Editor {...this.props} onUpdate={onEditorUpdate} tweet={api.tweet} />
+        <MetaLinks />
+        <Either>
+          <EditorContainer router={this.props.router} snippet={this.props.snippet} />
+          <p>
+            An unexpected error has occurred. Please{' '}
+            <u>
+              <a href="https://github.com/carbon-app/carbon">file an issue here</a>
+            </u>
+            .
+          </p>
+        </Either>
       </Page>
     )
   }
 }
 
-function onEditorUpdate(state) {
-  updateQueryString(state)
-  const s = { ...state }
-  delete s.code
-  delete s.backgroundImage
-  delete s.backgroundImageSelection
-  saveState(localStorage, s)
-}
-
-function removeQueryString(str) {
-  const qI = str.indexOf('?')
-  return (qI >= 0 ? str.substr(0, qI) : str)
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/\//g, '&#x2F;')
-}
-
-export default Index
+export default withRouter(Index)

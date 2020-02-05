@@ -1,9 +1,14 @@
 import React from 'react'
 import ReactCrop, { makeAspectCrop } from 'react-image-crop'
+import { useLocalStorage } from 'actionsack'
 
 import RandomImage from './RandomImage'
 import PhotoCredit from './PhotoCredit'
+import Input from './Input'
+import Toggle from './Toggle'
+import { Link } from './Meta'
 import { fileToDataURL } from '../lib/util'
+import ApiContext from './ApiContext'
 
 const getCroppedImg = (imageDataURL, pixelCrop) => {
   const canvas = document.createElement('canvas')
@@ -32,12 +37,23 @@ const getCroppedImg = (imageDataURL, pixelCrop) => {
   })
 }
 
-const INITIAL_STATE = { crop: null, imageAspectRatio: null, pixelCrop: null, photographer: null }
+const INITIAL_STATE = {
+  mode: 'file',
+  crop: null,
+  imageAspectRatio: null,
+  pixelCrop: null,
+  photographer: null,
+  dataURL: null
+}
 
-export default class extends React.Component {
+export default class ImagePicker extends React.Component {
+  static contextType = ApiContext
   constructor(props) {
     super(props)
     this.state = INITIAL_STATE
+    this.selectMode = this.selectMode.bind(this)
+    this.handleURLInput = this.handleURLInput.bind(this)
+    this.uploadImage = this.uploadImage.bind(this)
     this.selectImage = this.selectImage.bind(this)
     this.removeImage = this.removeImage.bind(this)
     this.onImageLoaded = this.onImageLoaded.bind(this)
@@ -45,25 +61,29 @@ export default class extends React.Component {
     this.onDragEnd = this.onDragEnd.bind(this)
   }
 
-  // TODO use getDerivedStateFromProps
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (this.state.crop && this.props.aspectRatio !== nextProps.aspectRatio) {
+  static getDerivedStateFromProps(nextProps, state) {
+    if (state.crop) {
       // update crop for editor container aspect-ratio change
-      this.setState({
+      return {
         crop: makeAspectCrop(
           {
-            ...this.state.crop,
+            ...state.crop,
             aspect: nextProps.aspectRatio
           },
-          this.state.imageAspectRatio
+          state.imageAspectRatio
         )
-      })
+      }
     }
+    return null
+  }
+
+  selectMode(mode) {
+    this.setState({ mode })
   }
 
   async onDragEnd() {
     if (this.state.pixelCrop) {
-      const croppedImg = await getCroppedImg(this.props.imageDataURL, this.state.pixelCrop)
+      const croppedImg = await getCroppedImg(this.state.dataURL, this.state.pixelCrop)
       this.props.onChange({ backgroundImageSelection: croppedImg })
     }
   }
@@ -90,18 +110,69 @@ export default class extends React.Component {
     })
   }
 
-  selectImage(e, { photographer } = {}) {
-    const file = e.target ? e.target.files[0] : e
-
-    return fileToDataURL(file).then(dataURL =>
-      this.setState({ photographer }, () => {
-        this.props.onChange({
-          backgroundImage: dataURL,
-          backgroundImageSelection: null,
-          photographer
-        })
+  handleImageChange = (url, dataURL, photographer) => {
+    this.setState({ dataURL, photographer }, () => {
+      this.props.onChange({
+        backgroundImage: url,
+        backgroundImageSelection: null,
+        photographer
       })
-    )
+    })
+  }
+
+  handleURLInput(e) {
+    e.preventDefault()
+    const url = e.target[0].value
+    return this.context
+      .downloadThumbnailImage({ url })
+      .then(res => res.dataURL)
+      .then(dataURL => this.handleImageChange(url, dataURL))
+      .catch(err => {
+        if (err.message.indexOf('Network Error') > -1) {
+          this.setState({
+            error:
+              'Fetching the image failed. This is probably a CORS-related issue. You can either enable CORS in your browser, or use another image.'
+          })
+        }
+      })
+  }
+
+  async uploadImage(e) {
+    const dataURL = await fileToDataURL(e.target.files[0])
+    return this.handleImageChange(dataURL, dataURL)
+  }
+
+  async selectImage(image) {
+    // TODO use React suspense for loading this asset
+    const { dataURL } = await this.context.downloadThumbnailImage(image)
+
+    this.handleImageChange(image.url, dataURL, image.photographer)
+    if (image.palette && image.palette.length && this.generateColorPalette) {
+      /*
+       * Background is first, which is either the lightest or darkest color
+       * and the rest are sorted by highest contrast w/ the background
+       */
+      const palette = image.palette.map(c => c.hex)
+      /*
+       * Contributors, please feel free to adjust this algorithm to create the most
+       * readible or aesthetically pleasing syntax highlighting.
+       */
+      this.props.updateHighlights({
+        background: palette[0],
+        text: palette[1],
+        variable: palette[2],
+        attribute: palette[3],
+        definition: palette[4],
+        keyword: palette[5],
+        property: palette[6],
+        string: palette[7],
+        number: palette[8],
+        operator: palette[9],
+        meta: palette[10],
+        tag: palette[11],
+        comment: palette[12]
+      })
+    }
   }
 
   removeImage() {
@@ -117,12 +188,32 @@ export default class extends React.Component {
     let content = (
       <div>
         <div className="choose-image">
-          <span>Click the button below to upload a background image:</span>
-          <input
-            type="file"
-            accept="image/x-png,image/jpeg,image/jpg"
-            onChange={this.selectImage}
-          />
+          <span>Upload a background image:</span>
+          <button
+            className={this.state.mode === 'file' ? 'active' : 'none'}
+            onClick={this.selectMode.bind(this, 'file')}
+          >
+            File
+          </button>
+          <button
+            className={this.state.mode === 'url' ? 'active' : 'none'}
+            onClick={this.selectMode.bind(this, 'url')}
+          >
+            URL
+          </button>
+          {this.state.mode === 'file' ? (
+            <Input
+              type="file"
+              accept="image/png,image/x-png,image/jpeg,image/jpg"
+              onChange={this.uploadImage}
+            />
+          ) : (
+            <form onSubmit={this.handleURLInput}>
+              <Input type="text" title="Background Image" placeholder="Image URL..." align="left" />
+              <button type="submit">Upload</button>
+            </form>
+          )}
+          {this.state.error && <span className="error">{this.state.error}</span>}
         </div>
         <hr />
         <div className="random-image">
@@ -130,17 +221,44 @@ export default class extends React.Component {
             Or use a random <a href="https://unsplash.com/">Unsplash</a> image:
           </span>
           <RandomImage onChange={this.selectImage} />
+          <GeneratePaletteSetting onChange={value => (this.generateColorPalette = value)} />
         </div>
         <style jsx>
           {`
+            button {
+              display: inline-block;
+            }
+
             .choose-image,
             .random-image {
               padding: 8px;
             }
 
-            input {
+            .choose-image > button {
               cursor: pointer;
+              color: white;
+              background: transparent;
+              border: none;
               outline: none;
+              padding: 0;
+              margin: 0 8px 8px 0;
+            }
+
+            .choose-image > button:not(.active) {
+              opacity: 0.4;
+            }
+
+            .choose-image > button:focus {
+              text-decoration: underline;
+            }
+
+            form {
+              display: flex;
+              justify-content: space-between;
+            }
+
+            form > button {
+              padding: 1px 18px 2px 7px;
             }
 
             span {
@@ -155,24 +273,28 @@ export default class extends React.Component {
             hr {
               border-bottom: none;
               margin-bottom: 0;
+              margin-top: 0;
+            }
+
+            .error {
+              color: red;
+              margin-top: 8px;
             }
           `}
         </style>
       </div>
     )
 
-    if (this.props.imageDataURL) {
+    if (this.state.dataURL) {
       content = (
         <div className="settings-container">
           <div className="image-container">
             <div className="label">
               <span>Background image</span>
-              <a href="#" onClick={this.removeImage}>
-                &times;
-              </a>
+              <button onClick={this.removeImage}>&times;</button>
             </div>
             <ReactCrop
-              src={this.props.imageDataURL}
+              src={this.state.dataURL}
               onImageLoaded={this.onImageLoaded}
               crop={this.state.crop}
               onChange={this.onCropChange}
@@ -185,6 +307,18 @@ export default class extends React.Component {
           </div>
           <style jsx>
             {`
+              button {
+                cursor: pointer;
+                color: inherit;
+                appearance: none;
+                border: none;
+                background: none;
+                display: block;
+                padding: 0;
+                margin: 0;
+                line-height: 16px;
+              }
+
               .settings-container img {
                 width: 100%;
               }
@@ -215,8 +349,9 @@ export default class extends React.Component {
     }
 
     return (
-      <div>
-        <div className="image-picker-container">{content}</div>
+      <div className="image-picker-container">
+        <Link href="/static/react-crop.css" />
+        {content}
         <style jsx>
           {`
             .image-picker-container {
@@ -227,4 +362,18 @@ export default class extends React.Component {
       </div>
     )
   }
+}
+
+function GeneratePaletteSetting({ onChange }) {
+  const [enabled, setEnabled] = useLocalStorage('CARBON_GENERATE_COLOR_PALETTE')
+  React.useEffect(() => void onChange(enabled), [enabled, onChange])
+
+  return (
+    <Toggle
+      label="Generate color palette (beta)"
+      enabled={enabled}
+      onChange={setEnabled}
+      padding="8px 0 0"
+    />
+  )
 }

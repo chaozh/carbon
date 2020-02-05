@@ -1,3 +1,5 @@
+import React from 'react'
+
 export default () => (
   <style jsx global>
     {`
@@ -14,7 +16,6 @@ export default () => (
         --h5: 0.75rem;
 
         --lh: calc(4 / 3);
-        --mx: 32em;
 
         --m1: calc(2 / 3 * 1em);
         --m2: calc(4 / 3 * 1em);
@@ -31,7 +32,6 @@ export default () => (
       body {
         font-size: var(--h4);
         line-height: var(--lh);
-        margin: 2rem 0;
       }
 
       h1,
@@ -66,64 +66,6 @@ export default () => (
       h5,
       h6 {
         font-size: var(--h5);
-      }
-
-      .h0 {
-        font-size: var(--h0);
-      }
-      .h1 {
-        font-size: var(--h1);
-      }
-      .h2 {
-        font-size: var(--h2);
-      }
-      .h3 {
-        font-size: var(--h3);
-      }
-      .h4 {
-        font-size: var(--h4);
-      }
-      .h5 {
-        font-size: var(--h5);
-      }
-      .h6 {
-        font-size: var(--h5);
-      }
-
-      @media screen and (min-width: 40em) {
-        .xh0 {
-          font-size: var(--h0);
-        }
-        .xh1 {
-          font-size: var(--h1);
-        }
-        .xh2 {
-          font-size: var(--h2);
-        }
-        .xh3 {
-          font-size: var(--h3);
-        }
-        .xh4 {
-          font-size: var(--h4);
-        }
-        .xh5 {
-          font-size: var(--h5);
-        }
-        .xh6 {
-          font-size: var(--h5);
-        }
-      }
-
-      .lh1 {
-        line-height: 1;
-      }
-      /* h0, h1, h3 */
-      .lh2 {
-        line-height: calc(7 / 6 * 1em);
-      }
-      /* For body copy */
-      .lh3 {
-        line-height: calc(16 / 9 * 1em);
       }
 
       .mt0 {
@@ -167,13 +109,6 @@ export default () => (
       }
       .mb6 {
         margin-bottom: var(--x6);
-      }
-
-      .mx {
-        max-width: var(--mx);
-      }
-      .bold {
-        font-weight: bold;
       }
     `}
   </style>

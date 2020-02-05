@@ -1,24 +1,37 @@
+import React from 'react'
 import Page from '../components/Page'
-import { COLORS } from '../lib/constants'
 
 export default () => (
   <Page>
     <div className="about">
       <div className="mb4">
         <h2>What does this do?</h2>
+        <p>Carbon lets you create and share beautiful images of your source code</p>
         <p>
           You know all of those code screenshots you see on Twitter? Although the code&apos;s
-          usually impressive, we saw room for improvement in the aesthetic department. Carbon is the
-          easiest way to create beautiful images of your source code. So what are you waiting for?
-          Go impress all of your followers with your newfound design prowess.{' '}
+          usually impressive, we thought there was room for improvement in the aesthetic department.
+          So what are you waiting for? Go try it out and impress all your developer and designer
+          friends.{' '}
           <span role="img" aria-label="Palette">
             🎨
           </span>
         </p>
       </div>
       <div className="mb4">
+        <h2>Who uses it?</h2>
+        <p>
+          Carbon is used by thousands of developers daily, including experts at:
+          <img
+            className="mt2"
+            width="508px"
+            src="/static/svg/open-source-companies-2.svg"
+            alt="Companies that trust Carbon: Google, Airbnb, GitHub, Coinbase, and Microsoft"
+          />
+        </p>
+      </div>
+      <div className="mb4">
         <h2>How do I use it?</h2>
-        <h4 className="mb0">Import</h4>
+        <h4 className="mb0 mt3">Import</h4>
         <p className="mb1 mt2">There are a few different ways to import code into Carbon:</p>
         <ul className="mt0 mb3">
           <li>Drop a file into the editor</li>
@@ -31,7 +44,7 @@ export default () => (
           </li>
           <li>Paste your code directly</li>
         </ul>
-        <h4 className="mb0">Customization</h4>
+        <h4 className="mb0 mt4">Customization</h4>
         <p className="mt2 mb3">
           Once you&apos;ve got all of your code into Carbon, you can customize your image by
           changing the syntax theme, background color/image, window theme, or padding.
@@ -40,29 +53,88 @@ export default () => (
           You can even drop an image file onto the editor to set the background to that image. Give
           it a try!
         </p>
-        <h4 className="mb0">Export/Sharing</h4>
-        <p className="mt2">
+        <h4 className="mb0 mt4">Export/Sharing</h4>
+        <p className="mt2 mb3">
           After you&apos;ve customized your image you can Tweet a link to the image, or save it
           directly.
         </p>
+        <p className="mt2 mb3">
+          If you use the &apos;Tweet&apos; button, Carbon will automatically make your image
+          accessible. However, if you want to manually tweet your carbon image, please check out (
+          <a className="link" href="https://help.twitter.com/en/using-twitter/picture-descriptions">
+            how to make your Twitter images accessible
+          </a>
+          ).
+        </p>
+        <p className="mt2 mb3">
+          If you include a Carbon image in a post, the source code will be invisible to assistive
+          technology — it will not be possible to enlarge or copy it, etc. Please, think about
+          adding another element with the source code as text, like (
+          <a
+            className="link"
+            href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details"
+          >
+            an HTML Details Element
+          </a>
+          ) below the image.
+        </p>
+        <h4 className="mb0 mt4" id="shortcuts">
+          Keyboard Shortcuts
+        </h4>
+        <table className="mt2 mb3">
+          <tbody>
+            <tr>
+              <td>Open settings menu</td>
+              <td>
+                <kbd>⌘-/</kbd>
+              </td>
+            </tr>
+            <tr>
+              <td>Export as PNG</td>
+              <td>
+                <kbd>⌘-Shift-E</kbd>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
       <div>
         <h2>I want to make this better.</h2>
         <p>
-          <a className="link" href="https://github.com/dawnlabs/carbon">
-            Please do.
+          <a className="link" href="https://github.com/carbon-app/carbon#contribute">
+            Contributors welcome!
           </a>
         </p>
       </div>
     </div>
     <style jsx>
       {`
-        p,
-        li {
-          color: ${COLORS.GRAY};
+        .about {
+          font-size: 16px;
+          max-width: 632px;
+          margin: 0 auto var(--x4);
         }
 
-        span {
+        @media (max-width: 768px) {
+          .about {
+            max-width: 90vw;
+          }
+        }
+
+        img {
+          max-width: 100%;
+        }
+
+        h2 {
+          font-weight: bold;
+          font-size: 32px;
+        }
+        h4 {
+          font-weight: bold;
+        }
+
+        p,
+        li {
           color: #fff;
         }
 
@@ -71,8 +143,16 @@ export default () => (
           list-style-type: circle;
         }
 
-        .about {
-          max-width: 632px;
+        span {
+          color: #fff;
+        }
+
+        td {
+          padding: 0.25rem 0;
+        }
+
+        kbd {
+          margin-left: var(--x3);
         }
       `}
     </style>

@@ -1,3 +1,4 @@
+import React from 'react'
 import { COLORS } from '../../lib/constants'
 
 export default () => (
@@ -145,8 +146,6 @@ export default () => (
         font-style: normal;
         text-transform: initial;
         letter-spacing: initial;
-        overflow-y: auto;
-        min-width: 848px;
         min-height: 704px;
       }
 
@@ -171,7 +170,23 @@ export default () => (
 
       *::selection {
         background: rgba(255, 255, 255, 0.99);
-        color: #121212;
+        color: ${COLORS.BLACK};
+      }
+
+      kbd {
+        display: inline-block;
+        padding: 3px 5px; /* padding: 2px 4px; */
+        font-size: 9px;
+        font-weight: 700;
+        line-height: 1.2;
+        color: ${COLORS.DARK_GRAY};
+        vertical-align: middle;
+        background-color: #fafbfc; /* ${COLORS.SECONDARY}; */
+        border: 1px solid #c6cbd1;
+        border-bottom-color: #959da5;
+        border-radius: 3px;
+        box-shadow: inset 0 -1px 0 #959da5;
+        white-space: nowrap;
       }
 
       .link {
@@ -191,6 +206,65 @@ export default () => (
       .link:hover {
         color: ${COLORS.PRIMARY};
         background: none;
+      }
+
+      .react-spinner {
+        z-index: 999;
+        position: relative;
+        width: 32px;
+        height: 32px;
+        top: 50%;
+        left: 50%;
+      }
+      .react-spinner_bar {
+        -webkit-animation: react-spinner_spin 1.2s linear infinite;
+        -moz-animation: react-spinner_spin 1.2s linear infinite;
+        animation: react-spinner_spin 1.2s linear infinite;
+        border-radius: 5px;
+        background-color: #fff;
+        position: absolute;
+        width: 20%;
+        height: 7.8%;
+        top: -3.9%;
+        left: -10%;
+      }
+
+      .row {
+        display: flex;
+      }
+
+      .capitalize {
+        text-transform: capitalize;
+      }
+
+      /* include just until we have a keyboard navigation style system */
+      [role='button']:focus {
+        outline: none;
+      }
+
+      @keyframes react-spinner_spin {
+        0% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0.15;
+        }
+      }
+      @-moz-keyframes react-spinner_spin {
+        0% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0.15;
+        }
+      }
+      @-webkit-keyframes react-spinner_spin {
+        0% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0.15;
+        }
       }
     `}
   </style>
