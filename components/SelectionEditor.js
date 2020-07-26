@@ -14,6 +14,7 @@ function ModifierButton(props) {
       margin="0 8px 0 0"
       style={{ borderBottom: `1px solid ${props.selected ? 'white' : 'transparent'}` }}
       onClick={props.onClick}
+      color={props.color}
     >
       {props.children}
     </Button>
@@ -25,25 +26,25 @@ function reducer(state, action) {
     case 'BOLD': {
       return {
         ...state,
-        bold: !state.bold
+        bold: !state.bold,
       }
     }
     case 'ITALICS': {
       return {
         ...state,
-        italics: !state.italics
+        italics: !state.italics,
       }
     }
     case 'UNDERLINE': {
       return {
         ...state,
-        underline: !state.underline
+        underline: Number(state.underline + 1) % 3,
       }
     }
     case 'COLOR': {
       return {
         ...state,
-        color: action.color
+        color: action.color,
       }
     }
   }
@@ -56,10 +57,10 @@ function SelectionEditor({ onChange }) {
   useKeyboardListener('Escape', () => setOpen(false))
 
   const [state, dispatch] = React.useReducer(reducer, {
-    bold: false,
-    italics: false,
-    underline: false,
-    color: null
+    bold: null,
+    italics: null,
+    underline: null,
+    color: null,
   })
 
   React.useEffect(() => {
@@ -79,6 +80,7 @@ function SelectionEditor({ onChange }) {
           <ModifierButton
             selected={state.underline}
             onClick={() => dispatch({ type: 'UNDERLINE' })}
+            color={state.underline === 2 ? COLORS.RED : undefined}
           >
             <u>U</u>
           </ModifierButton>

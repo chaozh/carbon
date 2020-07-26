@@ -3,109 +3,238 @@
 </p>
 
 <p align="center">
-  <a href="#contributors">
-    <img src="https://img.shields.io/badge/all_contributors-53-orange.svg?style=flat-square" alt="All Contributors" />
+  <a href="https://reporanger.com">
+    <img src="https://img.shields.io/badge/maintained%20with-Ranger-1f93f3.svg" alt="maintained with Ranger" />  
   </a>
-  <a href="https://github.com/prettier/prettier">
-    <img src="https://img.shields.io/badge/styled_with-prettier-ff69b4.svg" alt="styled with prettier" />
+  <a href="#contributors">
+    <img src="https://img.shields.io/badge/all_contributors-53-orange.svg" alt="All Contributors" />
   </a>
   <a href="/LICENSE">
     <img src="https://img.shields.io/github/license/carbon-app/carbon.svg" alt="MIT License" />
   </a>
-  <a href="https://greenkeeper.io/">
-    <img src="https://badges.greenkeeper.io/carbon-app/carbon.svg" alt="Greenkeeper badge" />
+  <a href="https://app.fossa.io/projects/git%2Bgithub.com%2Fcarbon-app%2Fcarbon?ref=badge_shield">
+    <img src="https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcarbon-app%2Fcarbon.svg?type=shield" alt="FOSSA Status" />
   </a>
 </p>
+
+<p align="center">	
+  <a href="https://opencollective.com/carbon-app">	
+    <img src="https://opencollective.com/carbon-app/tiers/badge.svg?label=Financial%20Contributors&color=297eff" alt="Open Collective sponsors" />	
+  </a>	
+  <a href="https://opencollective.com/carbon-app#backers">	
+    <img src="https://opencollective.com/carbon-app/tiers/backers/badge.svg?label=Backers&color=297eff" alt="Open Collective backers" />	
+  </a>	
+  <a href="https://opencollective.com/carbon-app#sponsors">	
+    <img src="https://opencollective.com/carbon-app/tiers/sponsors/badge.svg?label=Sponsors&color=297eff" alt="Open Collective sponsors" />	
+  </a>
+</p>
+
 <br></br>
 
-## Introduction
+##### Tłumaczenia
 
-Twitter で[いつも](https://twitter.com/dan_abramov/status/890191815567175680)[見るような](https://twitter.com/reactjs/status/890511993261654017)[こうしたコード](https://twitter.com/notquiteleo/status/873483329345028096)の[スクリーンショット](https://twitter.com/zeithq/status/805779711154647040)をご存知ですか？こうしたコードはたいていは印象的ですが、美しさの点では改善の余地があります。Carbon を使えば、ソースコードの美しいスクリーンショットを簡単に作成し、共有することができます。今すぐ、この新しいデザインの力を使ってフォロワーを感動させましょう。
+<table>
+  <tbody>
+    <tr>
+      <td>
+        <a href="/docs/README.es.md">Español</a>
+      </td>
+      <td>
+        <a href="/docs/README.hi.md">हिंदी</a>
+      </td>
+      <td>
+        <a href="/docs/README.de.md">Deutsch</a>
+      </td>
+      <td>
+        <a href="/docs/README.cn.zh.md">简体中文</a>
+      </td>
+      <td>
+        <a href="/docs/README.br.pt.md">Português</a>
+      </td>
+      <td>
+        <a href="/docs/README.ml.md">മലയാളം</a>
+      </td>
+      <td>
+        <a href="/docs/README.tr.md">Türkçe</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <a href="/docs/README.kr.md">한국어</a>
+      </td>
+      <td>
+        <a href="/docs/README.ta.md">தமிழ்</a>
+      </td>
+      <td>
+        <a href="/docs/README.fr.md">Français</a>
+      </td>
+      <td>
+        <a href="/docs/README.ja.md">日本語</a>
+      </td>
+      <td>
+        <a href="/docs/README.se.md">Svenska</a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/carbon-app/carbon/new/main/docs?filename=docs/README.%3Cnew%20language%3E.md">Add +</a>
+      </td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
 
-## Features
+## Wprowadzenie
 
-- **カスタマイズ**. シンタックステーマやウィンドウスタイルなどをカスタマイズ
-- **すばやくシェア**. ワンクリックで画像を保存したり、リンクをツイート
-- **GitHub gist からのインポート**. URL に GitHub gist id を付け加える
+Znasz [wszystkie](https://twitter.com/dan_abramov/status/890191815567175680) [te](https://twitter.com/reactjs/status/890511993261654017) [zrzuty ekranu](https://twitter.com/zeithq/status/805779711154647040) [z kodu](https://twitter.com/notquiteleo/status/873483329345028096) które widzisz na Twitterze? Chociaż kod zazwyczaj robi wrażenie, widzieliśmy miejsce na ulepszenia w dziale estetyki. Carbon ułatwia tworzenie i udostępnianie pięknych obrazów kodu źródłowego. Więc na co czekasz? Zaimponuj wszystkim swoim obserwatorom swoją nowo odkrytą umiejętnością projektowania.
 
-## Example
+<p align="center">
+  <img width="100%" alt="Carbon example" src="https://user-images.githubusercontent.com/8397708/63456416-b27d1a80-c403-11e9-9572-105b089be885.png">
+</p>
 
-<p><img width=80% src="https://user-images.githubusercontent.com/10369094/30791512-cb001438-a167-11e7-952b-f0f0e5c4499e.png"></p>
+## Cechy
 
-## Usage
+- **Dostosowywanie**. Dostosuj takie elementy, jak motyw składni obrazu, styl czcionki i nie tylko
+- **Udostępniaj szybko**. Zapisz swój obraz lub
+  link za jednym kliknięciem
+- **Zapisz snippety**. Utwórz konto, aby zapisać snippety na później. Udostępnione fragmenty są automatycznie rozwijane na Twitterze i Slacku.
+
+## Stosowanie
 
 #### Import
 
-Carbon にインポートするには何通りかの方法があります:
+Istnieje kilka różnych sposobów importowania kodu do Carbon:
 
-- エディターにファイルをドロップする
-- URL に GitHub gist id を付け加える (e.g. `carbon.now.sh/GIST_ID_HERE`)
-- コードを直接ペーストする
+- Upuść plik do edytora
+- Dołącz identyfikator gist GitHub do adresu URL (np. [`carbon.now.sh/<gist_id_goes_here>`](https://carbon.now.sh/3208813b324d82a9ebd197e4b1c3bae8))
+- Lub po prostu zacznij pisać!
 
-#### Customization
+#### Dostosowywanie
 
-コードを Carbon にインポートできたらシンタックステーマや背景色、ウィンドウスタイル、パディングなどで、画像をカスタマイズすることができます。
+Po umieszczeniu całego kodu w Carbon możesz dostosować swój obraz, zmieniając motyw składni, kolor tła, motyw okna, dopełnienie, cienie, czcionki i nie tylko.
 
-#### Export/Sharing
+#### Eksportowanie i udostępnianie
 
-画像のカスタマイズが終わったら、画像リンクをツイートしたり直接ダウンロードできます。
+Po dostosowaniu obrazu możesz udostępnić swój snippet na wiele sposobów
 
-&apos;Tweet&apos;ボタンを使えば、Carbon は自動的に画像を利用できるようにします。もし Carbon の画像を手動でツイートしたい場合は、[画像のアクセシビリティを向上させる方法](https://help.twitter.com/en/using-twitter/picture-descriptions)を確認してください。
+##### Utwórz zapisany snippet
 
-投稿の中で Carbon 画像を使うと、ソースコードは assistive technology からは見えなくなり、拡大やコピーなどはできなくなります。画像の下に[HTML Details Element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details)のように、テキストとしてソースコードを持つ別の要素を追加することを検討してください。
+Udostępnienie zapisanego snippeta spowoduje automatyczne rozwinięcie obrazu na platformach takich jak Twitter i Slack. Dzięki temu użytkownicy mogą zobaczyć twoje dzieło, jednocześnie dając im dostęp do kodu źródłowego za pośrednictwem linku. Jeszcze lepiej, jeśli chcesz dokonać aktualizacji, po prostu skorzystaj z łącza, aby bezpośrednio edytować fragment.
 
-#### Installing Carbon for Desktop
+Aby utworzyć zapisany snippet:
 
-Google Chrome などの PWA をサポートしているブラウザを使用しているなら、ブラウザの設定メニューから"Install Carbon..."をクリックすることで、Carbon をオフラインで使用するためにインストールできます。
+1. Zaloguj się za pomocą przycisku "Zaloguj się/Zarejestruj się"
+2. Edytuj jak zwykle - twój fragment zostanie zapisany automatycznie
+3. Skopiuj adres URL z okna przeglądarki i udostępnij!
 
-## Community
+##### Osadź snippet
 
-私たちの素晴らしいコミュニティが作成したプロジェクトをチェックしてください:
+Jest to zalecana metoda udostępniania Carbon na własnej stronie internetowej lub blogu. Czytelnicy mogą nawet skopiować kod jednym kliknięciem przycisku.
 
-##### Editor Plugins
+Możesz osadzić dowolny fragment Carbon w swojej witrynie bezpośrednio za pomocą rozszerzenia `carbon.now.sh/embed` URL. "Copy Menu" umożliwia szybkie skopiowanie prawidłowego fragmentu elementu iFrame lub zakodowanego adresu URL w celu umieszczenia na platformach takich jak Medium.
 
-- [IntelliJ IDEA `carbon-now-sh`](https://plugins.jetbrains.com/plugin/10469-carbon-now-sh) - 現在の IntelliJ IDEA ファイルの選択したコードをコンテキストメニューから Carbon で開く
-- [Atom `carbon-now-sh`](https://atom.io/packages/carbon-now-sh) - `shift-cmd-A`コマンドを使い、現在の Atom ファイルを Carbon で開く
-- [VS Code `carbon-now-sh`](https://marketplace.visualstudio.com/items?itemName=ericadamski.carbon-now-sh) - `carbon`コマンドを使い、VS Code ファイルを Carbon で開く
-- [Sublime Text 3 `carbon-now-sh`](https://github.com/molnarmark/carbonSublime) - カスタムコマンドを使い、現在の Sublime Text 3 ファイルの選択したコードを Carbon で開く
-- [Vim `carbon-now-sh`](https://github.com/kristijanhusak/vim-carbon-now-sh) - `CarbonNowSh()`関数を使い、現在の Vim/Neovim を Carbon で開く
-- [Emacs `carbon-now-sh`](https://github.com/veelenga/carbon-now-sh.el) - `carbon-now-sh`インタラクティブ関数を使い、現在の Emacs を Carbon で開く
-- [Xcode `carbon-now-sh`](https://github.com/StevenMagdy/CarboNow4Xcode) - `carbon.now.sh`を使い、選択したコードを Carbon で開く
+Na koniec możesz również osadzić zapisane snippety lub gisty GitHub za pomocą `carbon.now.sh/embed/:id`.
 
-##### Tools
+##### Użyj przycisku Tweet
 
-- [CLI `carbon-now-cli`](https://github.com/mixn/carbon-now-cli) - `carbon-now`を使い、Carbon でファイルを開いたり、直接ダウンロードする。インタラクティブモードや、シンタックスハイライト機能など
-- [Carbonize](https://itunes.apple.com/us/app/carbonize/id1451177988) - 拡張ネイティブ機能を備えた macOS ラッパー
-- [CodeExpander](https://codeexpander.com) - TextExpander 機能を備えたスマートな GitHub Gist クライアント
-- [`nef`](https://github.com/bow-swift/nef#-exporting-carbon-code-snippets) - `Xcode Playground`から複数の Carbon のコードスニペットをエクスポート
+Przycisk Tweet nie tylko udostępni obraz na Twitterze, ale także poprawnie zakoduje tekst `alt`, aby zapewnić dostępność obrazów. Jeśli jednak chcesz samodzielnie tweetować obraz, sprawdź [jak udostępnić swoje obrazy na Twitterze](https://help.twitter.com/en/using-twitter/picture-descriptions).
 
-##### Libraries
+##### Pobierz obraz bezpośrednio
 
-- [R `carbonate`](https://yonicd.github.io/carbonate/) - `R`でインタラクティブに画像のスタイルを操作し、コードを Carbon で開くか直接ダウンロードする
+Carbon obsługuje pobieranie obrazu w formacie PNG i SVG. Możesz także klikną `Export → Open`, aby otworzyć obraz bezpośrednio w przeglądarce. Na koniec możesz skopiować obraz Carbon bezpośrednio do schowka, przechodząc do `Copy → Image`.
 
-##### Textbooks
+#### Instalowanie Carbon for Desktop (Offline)
 
-- ["CS 101 - An Introduction to Computational Thinking"](https://itunes.apple.com/us/book/id1435714196) - Sarbo Roy によるコンピューターサイエンスのテキストブック
+Jeśli korzystasz z Google Chrome lub innej przeglądarki obsługującej progresywne aplikacje internetowe, możesz zainstalować Carbon do użytku w trybie offline przez:
 
-## Contribute
+1. Odwiedź [carbon.now.sh](https://carbon.now.sh)
+2. Kliknij menu ustawień przeglądarki
+3. Kliknij "Install Carbon..."
 
-PR を歓迎しています。詳細は[CONTRIBUTING.md](/.github/CONTRIBUTING.md)をご覧ください。
+## Społeczność
 
-## Thanks To
+Sprawdź te projekty, które stworzyła nasza niesamowita społeczność:
 
-[ ▲ Vercel ](https://vercel.com/)は Carbon のホスティングを支援してくれています。
+##### Wtyczki edytora
 
-## Authors
+- [IntelliJ IDEA `carbon-now-sh`](https://plugins.jetbrains.com/plugin/10469-carbon-now-sh) - Otwórz wybór w bieżącym pliku IntelliJ IDEA w Carbon za pomocą menu kontekstowego
+- [Atom `carbon-now-sh`](https://atom.io/packages/carbon-now-sh) - Otwórz swój bieżący plik Atom w Carbon za pomocą `shift-cmd-A`
+- [VS Code `carbon-now-sh`](https://marketplace.visualstudio.com/items?itemName=ericadamski.carbon-now-sh) - Otwórz bieżący plik VS Code w Carbon za pomocą polecenia `carbon`
+- [Sublime Text 3 `carbon-now-sh`](https://github.com/molnarmark/carbonSublime) - Otwórz zaznaczenie w bieżącym pliku Sublime Text 3 za pomocą niestandardowego powiązanego klucza
+- [Vim `carbon-now-sh`](https://github.com/kristijanhusak/vim-carbon-now-sh) - Otwórz wybór w aktualnym Vimie/Neovimie za pomocą funkcji `CarbonNowSh()`
+- [Emacs `carbon-now-sh`](https://github.com/veelenga/carbon-now-sh.el) - Otwórz zaznaczenie w aktualnym Emacsie za pomocą funkcji interaktywnej `carbon-now-sh`
+- [Xcode `carbon-now-sh`](https://github.com/StevenMagdy/CarboNow4Xcode) - Otwórz bieżący wybór w `carbon.now.sh`
+- [Xcode `nef`](https://github.com/bow-swift/nef-plugin) - To rozszerzenie Xcode umożliwia wyeksportowanie wybranego kodu jako snippetu Carbon w jednej akcji
 
-Carbon は次の人々によるプロジェクトです:
+##### Narzędzia
+
+- [CLI `carbon-now-cli`](https://github.com/mixn/carbon-now-cli) - Otwórz plik w Carbon lub pobierz go bezpośrednio za pomocą `carbon-now`, zawierającego tryb interaktywny, selektywne podświetlanie i nie tylko
+- [Carbonize](https://itunes.apple.com/us/app/carbonize/id1451177988) - Wrapper macOS z rozszerzonymi funkcjami natywnymi
+- [CodeExpander](https://codeexpander.com) - Inteligentny klient GitHub z funkcjami TextExpander
+- [`nef`](https://github.com/bow-swift/nef#-exporting-carbon-code-snippets) - Eksportuj wiele fragmentów kodu Carbon z `Xcode Playground`.
+- [`@carbonshbot`](https://t.me/carbonshbot) - Chatbot Telegrama, który pobiera fragment kodu lub główny adres URL i generuje obraz Carbon
+- [R `carbonate`](https://yonicd.github.io/carbonate/) - teracyjnie manipuluj estetyką obrazu w `R` i albo otwórz w Carbon, albo pobierz bezpośrednio.
+
+##### Cytaty
+
+- ["CS 101 - An Introduction to Computational Thinking"](https://itunes.apple.com/us/book/id1435714196) - podręcznik informatyki autorstwa Sarbo Roy.
+
+## Autorzy
+
+Carbon jest projektem od:
 
 - Mike Fix ([@mfix22](https://twitter.com/fixitup2))
 - Brian Dennis ([@briandennis](https://github.com/briandennis))
 - Jake Dexheimer ([@jakedex](https://github.com/jakedex))
 
-## Contributors
+#### Licencja
 
-これらのすべての素晴らしい人々に感謝を ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fcarbon-app%2Fcarbon.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fcarbon-app%2Fcarbon?ref=badge_large)
+
+<br />
+<br />
+
+---
+
+## Wnieś wkład i wsparcie
+
+Pull requesty są mile widziane! Zobacz nasze [contributing guidelines](/.github/CONTRIBUTING.md) aby uzyskać więcej szczegółów.
+
+### Sponsorzy
+
+Czy twoja firma używa Carbon? Rozważ sponsorowanie projektu, aby sfinansować nowe funkcje, poprawki błędów i nie tylko.
+
+<a href="https://fossa.com" style="margin-right: 2rem;" target="_blank"><img width="280px" src="https://fossa.com/wp-content/themes/rs_theme/assets/images/logo.svg" /></a>
+<a href="https://opencollective.com/carbon-app/sponsors/0/website" target="_blank"><img src="https://opencollective.com/carbon-app/sponsors/0/avatar"></a>
+<a href="https://opencollective.com/carbon-app/sponsors/1/website" target="_blank"><img src="https://opencollective.com/carbon-app/sponsors/1/avatar"></a>
+<a href="https://opencollective.com/carbon-app/sponsors/2/website" target="_blank"><img src="https://opencollective.com/carbon-app/sponsors/2/avatar"></a>
+<a href="https://opencollective.com/carbon-app/sponsors/3/website" target="_blank"><img src="https://opencollective.com/carbon-app/sponsors/3/avatar"></a>
+<a href="https://opencollective.com/carbon-app/sponsors/4/website" target="_blank"><img src="https://opencollective.com/carbon-app/sponsors/4/avatar"></a>
+
+### Backers
+
+Uwielbiasz używać Carbon? Rozważ wsparcie projektu w celu sfinansowania nowych funkcji i ulepszeń
+
+<a href="https://opencollective.com/carbon-app/backers/0/website" target="_blank"><img src="https://opencollective.com/carbon-app/backers/0/avatar"></a>
+<a href="https://opencollective.com/carbon-app/backers/1/website" target="_blank"><img src="https://opencollective.com/carbon-app/backers/1/avatar"></a>
+<a href="https://opencollective.com/carbon-app/backers/2/website" target="_blank"><img src="https://opencollective.com/carbon-app/backers/2/avatar"></a>
+<a href="https://opencollective.com/carbon-app/backers/3/website" target="_blank"><img src="https://opencollective.com/carbon-app/backers/3/avatar"></a>
+<a href="https://opencollective.com/carbon-app/backers/4/website" target="_blank"><img src="https://opencollective.com/carbon-app/backers/4/avatar"></a>
+<a href="https://opencollective.com/carbon-app/backers/5/website" target="_blank"><img src="https://opencollective.com/carbon-app/backers/5/avatar"></a>
+<a href="https://opencollective.com/carbon-app/backers/6/website" target="_blank"><img src="https://opencollective.com/carbon-app/backers/6/avatar"></a>
+<a href="https://opencollective.com/carbon-app/backers/7/website" target="_blank"><img src="https://opencollective.com/carbon-app/backers/7/avatar"></a>
+<a href="https://opencollective.com/carbon-app/backers/8/website" target="_blank"><img src="https://opencollective.com/carbon-app/backers/8/avatar"></a>
+<a href="https://opencollective.com/carbon-app/backers/9/website" target="_blank"><img src="https://opencollective.com/carbon-app/backers/9/avatar"></a>
+
+### Podziękowania dla
+
+[ ▲ Vercel ](https://vercel.com/) za sponsorowanie hostingu dla Carbon.
+
+### Współtwórcy
+
+![Contributors image](https://opencollective.com/carbon-app/contributors.svg?width=1024)
+
+#### Wszyscy współtwórcy
+
+Podziękowania dla wszystkich tych wspaniałych ludzi ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -208,7 +337,6 @@ Carbon は次の人々によるプロジェクトです:
     <td align="center"><a href="https://github.com/mearns"><img src="https://avatars1.githubusercontent.com/u/5140254?v=4" width="100px;" alt=""/><br /><sub><b>B. Mearns</b></sub></a><br /><a href="#ideas-mearns" title="Ideas, Planning, & Feedback">🤔</a></td>
     <td align="center"><a href="http://jiepeng.me"><img src="https://avatars3.githubusercontent.com/u/10325111?v=4" width="100px;" alt=""/><br /><sub><b>Peng Jie</b></sub></a><br /><a href="https://github.com/carbon-app/carbon/commits?author=neighborhood999" title="Code">💻</a></td>
     <td align="center"><a href="https://binyam.in"><img src="https://avatars3.githubusercontent.com/u/39805353?v=4" width="100px;" alt=""/><br /><sub><b>Binyamin Aron Green</b></sub></a><br /><a href="https://github.com/carbon-app/carbon/commits?author=b3u" title="Code">💻</a></td>
-    <td align="center"><a href="https://dev.to/mbiesiad"><img src="https://avatars0.githubusercontent.com/u/18367606?v=4" width="100px;" alt=""/><br /><sub><b>Michal</b></sub></a><br /><a href="#translation-mbiesiad" title="Translation">🌍</a></td>
   </tr>
 </table>
 

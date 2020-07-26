@@ -1,16 +1,16 @@
 import React from 'react'
 
 // Feature flag
-const ACTIVE = false
+const ACTIVE = true
 
-const key = 'CARBON_CTA_2'
+const key = 'CARBON_CTA_4'
 
 function Toast() {
   const [open, setState] = React.useState(false)
 
   React.useEffect(() => {
-    window.localStorage.removeItem('CARBON_CTA_1')
     window.localStorage.removeItem('CARBON_CTA_2')
+    window.localStorage.removeItem('CARBON_CTA_3')
     if (!window.localStorage.getItem(key)) {
       setState(true)
     }
@@ -36,13 +36,9 @@ function Toast() {
   return (
     <div className="toast mb4">
       <div className="toast-content">
-        <p>The team that created Carbon has been acquired!</p> —
-        <a
-          href="https://dawnlabs.io/fossa-acquires-dawnlabs"
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          Read more
+        <p>Black Lives Matter.</p>
+        <a href="https://www.joincampaignzero.org" target="_blank" rel="noreferrer noopener">
+          Help end police violence in America &rarr;
         </a>
         <button className="close-toast" onClick={close}>
           &times;
@@ -67,7 +63,6 @@ function Toast() {
             margin-top: calc(var(--x4) * -1);
             animation-name: slide;
             animation-duration: 600ms;
-            width: 610px;
             max-width: 100vw;
             margin-left: auto;
             margin-right: auto;
@@ -80,7 +75,7 @@ function Toast() {
 
           a {
             text-decoration: underline;
-            margin-left: 12px;
+            margin-left: 8px;
           }
 
           .close-toast {
@@ -90,14 +85,13 @@ function Toast() {
             color: white;
             border: none;
             font-size: 100%;
-            margin-left: 32px;
+            margin-left: 16px;
             text-decoration: none;
             cursor: pointer;
           }
 
           p {
             margin: 0;
-            margin-right: 12px;
           }
         `}
       </style>
