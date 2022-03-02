@@ -10,13 +10,6 @@ export default function Font() {
     <style jsx global>
       {`
         @font-face {
-          font-family: 'Iosevka';
-          font-display: swap;
-          src: url('//cdn.jsdelivr.net/npm/@typopro/web-iosevka@3.7.5/TypoPRO-iosevka-term-bold.woff')
-            format('woff');
-        }
-
-        @font-face {
           font-family: 'Monoid';
           font-display: swap;
           src: url('//cdn.jsdelivr.net/npm/@typopro/web-monoid@3.7.5/TypoPRO-Monoid-Regular.woff')
@@ -61,13 +54,25 @@ export default function Font() {
               format('woff2');
         }
 
+        @font-face {
+          font-family: 'Cascadia Code';
+          font-display: swap;
+          font-style: normal;
+          font-weight: 400;
+          src: local('Cascadia Code'),
+            url('//cdn.jsdelivr.net/npm/@fontsource/cascadia-code@latest/files/cascadia-code-latin-ext-400-normal.woff2')
+              format('woff2'),
+            url('//cdn.jsdelivr.net/npm/@fontsource/cascadia-code@latest/files/cascadia-code-latin-ext-400-normal.woff')
+              format('woff');
+        }
+
         /* latin */
         @font-face {
           font-family: 'IBM Plex Mono';
           font-display: swap;
           font-weight: 500;
           src: local('IBM Plex Mono Regular'), local('IBMPlexMono-Regular'),
-            url(//fonts.gstatic.com/s/ibmplexmono/v6/-F63fjptAgt5VM-kVkqdyU8n1i8q131nj-o.woff2)
+            url(//cdn.jsdelivr.net/gh/ibm/plex@latest/IBM-Plex-Mono/fonts/complete/woff2/IBMPlexMono-Regular.woff2)
               format('woff2');
         }
 

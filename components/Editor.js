@@ -32,8 +32,8 @@ import {
   DEFAULT_THEME,
   FONTS,
 } from '../lib/constants'
-import { serializeState, getRouteState } from '../lib/routing'
-import { getSettings, unescapeHtml, formatCode, omit, dataURLtoBlob } from '../lib/util'
+import { getRouteState } from '../lib/routing'
+import { getSettings, unescapeHtml, formatCode, omit } from '../lib/util'
 import domtoimage from '../lib/dom-to-image'
 
 const languageIcon = <LanguageIcon />
@@ -77,15 +77,6 @@ class Editor extends React.Component {
     }
 
     this.setState(newState)
-
-    if (window.navigator) {
-      this.isSafari =
-        window.navigator.userAgent.indexOf('Safari') !== -1 &&
-        window.navigator.userAgent.indexOf('Chrome') === -1
-      this.isFirefox =
-        window.navigator.userAgent.indexOf('Firefox') !== -1 &&
-        window.navigator.userAgent.indexOf('Chrome') === -1
-    }
   }
 
   carbonNode = React.createRef()
@@ -105,7 +96,6 @@ class Editor extends React.Component {
   getCarbonImage = async (
     {
       format,
-      type,
       squared = this.state.squaredImage,
       exportSize = (EXPORT_SIZES_HASH[this.state.exportSize] || DEFAULT_EXPORT_SIZE).value,
     } = { format: 'png' }
@@ -137,10 +127,6 @@ class Editor extends React.Component {
       height,
     }
 
-    // current font-family used
-    const fontFamily = this.state.fontFamily
-
-    // TODO consolidate type/format to only use one param
     if (format === 'svg') {
       return domtoimage
         .toSvg(node, config)
@@ -154,7 +140,11 @@ class Editor extends React.Component {
             .replace(/&(?!#?[a-z0-9]+;)/g, '&amp;')
             // remove other fonts which are not used
             .replace(
-              new RegExp('@font-face\\s+{\\s+font-family: (?!"*' + fontFamily + ').*?}', 'g'),
+              // current font-family used
+              new RegExp(
+                '@font-face\\s+{\\s+font-family: (?!"*' + this.state.fontFamily + ').*?}',
+                'g'
+              ),
               ''
             )
         )
@@ -162,21 +152,7 @@ class Editor extends React.Component {
         .then(data => new Blob([data], { type: 'image/svg+xml' }))
     }
 
-    // if safari, get image from api
-    if (this.context.image && this.isSafari) {
-      const themeConfig = this.getTheme()
-      // pull from custom theme highlights, or state highlights
-      const encodedState = serializeState({
-        ...this.state,
-        highlights: { ...themeConfig.highlights, ...this.state.highlights },
-      })
-      // TODO consider returning blob responseType from axios
-      return this.context
-        .image(encodedState)
-        .then(dataURL => (type === 'blob' ? dataURLtoBlob(dataURL) : dataURL))
-    }
-
-    if (type === 'blob') {
+    if (format === 'blob') {
       return domtoimage.toBlob(node, config)
     }
 
@@ -196,18 +172,22 @@ class Editor extends React.Component {
     return this.getCarbonImage({ format: 'png' }).then(data => this.context.imgur(data, prefix))
   }
 
-  exportImage = (format = 'png', options = {}) => {
+  exportImage = (format = 'blob', options = {}) => {
     const link = document.createElement('a')
 
     const prefix = options.filename || this.state.name || 'carbon'
 
-    return this.getCarbonImage({ format, type: 'blob' })
+    return this.getCarbonImage({ format })
       .then(blob => window.URL.createObjectURL(blob))
       .then(url => {
-        if (format !== 'open') {
-          link.download = `${prefix}.${format}`
+        if (!options.open) {
+          link.download = `${prefix}.${format === 'svg' ? 'svg' : 'png'}`
         }
-        if (this.isFirefox) {
+        if (
+          // isFirefox
+          window.navigator.userAgent.indexOf('Firefox') !== -1 &&
+          window.navigator.userAgent.indexOf('Chrome') === -1
+        ) {
           link.target = '_blank'
         }
         link.href = url
@@ -218,7 +198,7 @@ class Editor extends React.Component {
   }
 
   copyImage = () =>
-    this.getCarbonImage({ format: 'png', type: 'blob' })
+    this.getCarbonImage({ format: 'blob' })
       .then(blob =>
         navigator.clipboard.write([
           new window.ClipboardItem({
@@ -365,31 +345,32 @@ class Editor extends React.Component {
             onChange={this.updateLanguage}
           />
           <div className="toolbar-second-row">
-            <BackgroundSelect
-              onChange={this.updateBackground}
-              updateHighlights={this.updateHighlights}
-              mode={backgroundMode}
-              color={backgroundColor}
-              image={backgroundImage}
-              carbonRef={this.carbonNode.current}
-            />
-            <Settings
-              {...config}
-              onChange={this.updateSetting}
-              resetDefaultSettings={this.resetDefaultSettings}
-              format={this.format}
-              applyPreset={this.applyPreset}
-              getCarbonImage={this.getCarbonImage}
-            />
-            <div id="style-editor-button" />
-            <div className="buttons">
+            <div className="setting-buttons">
+              <BackgroundSelect
+                onChange={this.updateBackground}
+                updateHighlights={this.updateHighlights}
+                mode={backgroundMode}
+                color={backgroundColor}
+                image={backgroundImage}
+                carbonRef={this.carbonNode.current}
+              />
+              <Settings
+                {...config}
+                onChange={this.updateSetting}
+                resetDefaultSettings={this.resetDefaultSettings}
+                format={this.format}
+                applyPreset={this.applyPreset}
+                getCarbonImage={this.getCarbonImage}
+              />
               <CopyMenu copyImage={this.copyImage} carbonRef={this.carbonNode.current} />
+            </div>
+            <div id="style-editor-button" />
+            <div className="share-buttons">
               <ShareMenu tweet={this.tweet} imgur={this.imgur} />
               <ExportMenu
                 onChange={this.updateSetting}
                 exportImage={this.exportImage}
                 exportSize={exportSize}
-                backgroundImage={backgroundImage}
               />
             </div>
           </div>
@@ -435,22 +416,31 @@ class Editor extends React.Component {
               padding: 16px;
             }
 
-            .buttons {
+            .share-buttons,
+            .setting-buttons {
               display: flex;
               margin-left: auto;
+              height: 40px;
             }
             .toolbar-second-row {
-              height: 40px;
               display: flex;
               flex: 1 1 auto;
             }
-            .toolbar-second-row > :global(div:not(:last-of-type)) {
+            .setting-buttons > :global(div) {
               margin-right: 0.5rem;
             }
 
             #style-editor-button {
               display: flex;
               align-items: center;
+            }
+            @media (max-width: 768px) {
+              .toolbar-second-row {
+                display: block;
+              }
+              #style-editor-button {
+                margin-top: 0.5rem;
+              }
             }
           `}
         </style>
